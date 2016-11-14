@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <title>Slot Machine</title>
+
+    <script>
+        var count = 0;
+        var jackpot = 0;
+
+try {
+        function write_message( message ) {
+            document.getElementById('messages').innerHTML = message;
+        }
+
+        function refresh()
+        {
+            if ( count >= 5 ) {
+                refreshCounts(-5);
+                var one = Math.floor((Math.random()*9)+1);
+                var two = Math.floor((Math.random()*9)+1);
+                var three = Math.floor((Math.random()*9)+1);
+                jackpotCount();
+
+                document.getElementById('first').innerHTML = one;
+                document.getElementById('second').innerHTML = two;
+                document.getElementById('third').innerHTML = three;
+
+
+                if ( one == two && two == three && three == one  ) {
+                    window.open("Fireworks.html");
+                    refreshCounts(+250 + jackpot);
+
+
+                    write_message("You Won $250! + $" +jackpot);
+                    jackpot = 0
+                }
+
+                else {
+                    write_message( 'Try again' );
+                }
+
+
+            } else {
+                write_message( 'Out of Money!' );
+            }
+        }
+
+        function refreshCounts(value) {
+            count = count + value;
+            document.getElementById("money").innerHTML = count;
+        }
+
+        function jackpotCount() {
+            jackpot = jackpot + 2;
+            document.getElementById("jackpot").innerHTML = jackpot;
+        }
+
+}
+
+catch (e) {}
+
+
+    </script>
+
+    <style>
+
+        html {
+            background: url(Las_Vegas_slot_machines.jpg);
+            background-size: cover;
+            
+        }
+
+        body {
+            text-align: center;
+
+        }
+
+        p, a {
+            color: yellow;
+            font-size: 30px;
+            border-color: gray;
+            border: groove;
+            background-color: black;
+
+        }
+
+        h1 {
+            font-size: 50px;
+            text-align: center;
+            color: red;
+            background-color: white;
+            border: groove;
+            border-color: gray;
+
+        }
+
+        #machine {
+            text-align: center;
+        }
+
+        a{
+             border: groove;
+             border-color: red;
+             background-color: yellow;
+             color: black;
+
+         }
+
+        h3 {
+            font-size: 20px;
+            text-align: center;
+            color: red;
+            background-color: white;
+            border: groove;
+            border-color: gray;
+        }
+
+        label{
+            font-size: 40px;
+            text-align: center;
+            color: yellow;
+            background-color: black;
+            border: groove;
+            border-color: gray;
+        }
+
+
+
+
+
+
+    </style>
+</head>
+
+<body>
+    <img src="CasinoSlotsLogo2.png">
+
+<div>
+
+<h3>
+    $5 to play and you can win 250$ if you get three of the same number.
+</h3>
+
+</div>
+
+<label> &nbsp;Jackpot: $<span id="jackpot">0</span></label>
+
+
+<div id="machine">
+    <svg width="550" height="250" viewBox="0 100 1600 500">
+
+        <rect x="0" y="10" width="500" height="500" fill="white" stroke="gray" stroke-width="10">
+        </rect>
+
+        <rect x="550" y="10" width="500" height="500" fill="white" stroke="gray" stroke-width="10">
+        </rect>
+
+        <rect x="1100" y="10" width="500" height="500" fill="white" stroke="gray" stroke-width="10">
+        </rect>
+
+        <text x="100" y="415" font-family="courier" font-size="500" fill="red" id="first">
+            0
+        </text>
+
+        <text x="650" y="415" font-family="courier" font-size="500" fill="red" id ="second">
+            0
+        </text>
+
+        <text x="1200" y="415" font-family="courier" font-size="500" fill="red" id="third">
+            0
+        </text>
+    </svg>
+</div>
+
+
+<svg width="550" height="150" viewBox="0 0 1600 500">
+    <rect height="300" width="300" x="650" y="10" fill="black" stroke="gray" stroke-width="10">
+
+    </rect>
+
+    <text x="650" y="200" font-family="courier" font-size="100" fill="yellow" > $<tspan id="money">0</tspan>
+
+    </text>
+</svg>
+
+<br>
+
+
+
+
+
+    <input type="button" value="Click to Spin" onClick="refresh()"> <br><br>
+
+
+
+    <input type="button" value="Add $1" onClick="refreshCounts(+1)">
+    <input type="button" value="Add $5" onClick="refreshCounts(+5)">
+    <input type="button" value="Add $10" onClick="refreshCounts(+10)">
+    <input type="button" value="Add $20" onClick="refreshCounts(+20)">
+
+<br>
+<br>
+
+
+<label id="messages">&nbsp;Insert Money to Play!&nbsp;</label>
